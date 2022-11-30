@@ -5,19 +5,22 @@ import ImportantPage from './pages/ImportantPage';
 import TodoPage from './pages/TodoPage';
 import CalendarPage from './pages/CalendarPage';
 import Navbar from './pages/Navbar';
+import NewTask from './components/NewTask'
 
 function App() {
   return (
     <>
       <div className="flex flex-col">
+        {/* TODO: Change flex into grid */}
         <Navbar />
-        <div className='flex'>
+        <div className="flex">
           <Sidebar />
           <Routes>
             <Route path="/" element={<TodayPage />} />
             <Route path="/important" element={<ImportantPage />} />
             <Route path="/to-do" element={<TodoPage />} />
             <Route path="/calendar" element={<CalendarPage />} />
+            <Route path="/newtask" element={<NewTask />} />
           </Routes>
         </div>
       </div>
