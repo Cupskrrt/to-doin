@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import Navbar from '../pages/Navbar';
 
 const NewTask = () => {
   const [title, setTitle] = useState('');
@@ -40,7 +41,7 @@ const NewTask = () => {
           />
           {/* TODO: Add other item in the task (Date, Tags, Desc) */}
 
-          <button className="border-2">Add Task</button>
+          <button className="border-2" onClick={<Navbar state={false}/>}>Add Task</button>
         </form>
       </div>
     </>

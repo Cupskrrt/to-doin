@@ -11,7 +11,7 @@ import AddTag from '../components/AddTag';
 
 const Sidebar = () => {
   return (
-    <div className="w-[12rem] h-[91.4vh] border-r-2">
+    <div className="w-[15vw] h-[90vh] border-r-2">
       {/* TODO: Change the Link into NavLink */}
       <div className="flex flex-col gap-6 p-5">
         <Link to="/">

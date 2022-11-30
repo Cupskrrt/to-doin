@@ -10,8 +10,7 @@ import NewTask from './components/NewTask'
 function App() {
   return (
     <>
-      <div className="flex flex-col">
-        {/* TODO: Change flex into grid */}
+      <div>
         <Navbar />
         <div className="flex">
           <Sidebar />

@@ -8,7 +8,7 @@ import {
 const TaskCard = () => {
   return (
     <>
-      <div className="flex justify-between items-center border-2 w-[80vw] p-4">
+      <div className="flex justify-between items-center border-2 gap-10 p-4 w-[80vw]">
         <div className="flex flex-col">
           <h2 className="font-bold">Task</h2>
           <p className="text-xs">Task Date</p>

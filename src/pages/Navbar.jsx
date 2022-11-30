@@ -8,10 +8,10 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex justify-between p-4 items-center border-b-2">
+      <div className="flex justify-between p-4 items-center border-b-2 h-[10vh]">
         <h1 className="font-bold text-2xl">to-doin</h1>
         <div className="flex gap-5">
-          <PlusIcon className="w-[1.5rem]" onClick={e => setState(!state)} />
+          <PlusIcon className="w-[1.5rem] hover:cursor-pointer" onClick={e => setState(!state)} />
           <BellIcon className="w-[1.5rem]" />
           <Profile />
         </div>
