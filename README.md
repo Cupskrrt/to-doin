@@ -13,3 +13,4 @@ TODO for this app:
 [] Fetch data from api
 [] Add functionality to all button
 [] Create the rest of the needed pages
+
