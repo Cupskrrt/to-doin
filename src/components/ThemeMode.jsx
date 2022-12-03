@@ -21,7 +21,6 @@ const ThemeMode = () => {
 
   return (
     <>
-      {/* TODO: Create theme mode using css */}
       <button className={`w-[2rem]`} onClick={() => setIcon(!icon)}>
         {!icon && <SunIcon />}
         {icon && <MoonIcon />}
