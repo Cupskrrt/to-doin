@@ -4,7 +4,6 @@ import Profile from '../components/Profile';
 import NewTask from '../components/NewTask';
 
 const Navbar = () => {
-  // TODO: Disable interactivity on bg component when a modal is showing
   const [state, setState] = useState(false);
 
   const setPopup = () => {

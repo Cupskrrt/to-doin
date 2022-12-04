@@ -10,9 +10,9 @@ import NewTask from './components/NewTask'
 function App() {
   return (
     <>
-      <div>
+      <div className='flex flex-col'>
         <Navbar />
-        <div className="flex">
+        <div className='flex'>
           <Sidebar />
           <Routes>
             <Route path="/" element={<TodayPage />} />
