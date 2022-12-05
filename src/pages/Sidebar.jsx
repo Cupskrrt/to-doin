@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import ThemeMode from '../components/ThemeMode';
 import Today from '../components/Today';
@@ -6,10 +6,16 @@ import Important from '../components/Important';
 import Todo from '../components/Todo';
 import Calendar from '../components/Calendar';
 import Tags from '../components/Tags';
-import TagItem from '../components/TagItem';
 import AddTag from '../components/AddTag';
+import NewTag from '../components/NewTag';
 
 const Sidebar = () => {
+  const [tagShow, setTagShow] = useState(false);
+
+  function showTag() {
+    setTagShow(!tagShow)
+  }
+
   return (
     <div className="w-[15vw] h-[90vh] border-r-2">
       {/* TODO: Change the Link into NavLink */}
@@ -29,9 +35,9 @@ const Sidebar = () => {
         <hr />
         <div>
           <Tags />
-          <TagItem />
+          {tagShow && <NewTag />}
+          <AddTag onClick={showTag}/>
         </div>
-        <AddTag />
         <ThemeMode />
       </div>
     </div>

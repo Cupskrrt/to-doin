@@ -1,15 +1,15 @@
 import React from 'react';
 import {PlusIcon} from '@heroicons/react/24/outline';
 
-const AddTag = () => {
+const AddTag = ({onClick}) => {
   return (
     <>
-      <div className="flex gap-4">
+      <div className="flex gap-3 mt-[1rem]" onClick={onClick}>
         <PlusIcon className="w-[1rem]" />
-        <p className="text-xs">Add new tags</p>
+        <p className="text-xs">Add new tag</p>
       </div>
     </>
   );
 };
 
-export default AddTag
+export default AddTag;
