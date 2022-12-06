@@ -27,23 +27,22 @@ const NewTask = ({popup}) => {
       {/* TODO: Refactor code to make it cleaner */}
       {/* TODO: Style new task to make it more beautiful */}
       <div className="fixed w-screen backdrop-blur-sm h-screen z-10">
-        <div className="fixed bg-gray-400 right-[25%] bottom-[25%] top-[25%] left-[25%] z-10">
-          <div className='flex justify-between p-5'>
+        <div className="fixed bg-white shadow-2xl rounded-xl right-[25%] bottom-[25%] top-[25%] left-[25%] h-[15rem] z-10">
+          <div className='flex justify-between p-3'>
             <h1 className="font-bold text-xl">New Task</h1>
             <XMarkIcon className="w-[2rem] cursor-pointer" onClick={popup} />
           </div>
-          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <label htmlFor="task-title">Task</label>
+          <form className="flex flex-col p-3" onSubmit={handleSubmit}>
             <input
               id="task-title"
               value={title}
               type="text"
-              className="border-2 m-2"
+              className="border-b-[1px] pb-2"
               onChange={e => {
                 setTitle(e.target.value);
               }}
+              placeholder="Task"
             />
-            <label htmlFor="task-date">Date</label>
             <input type="date" />
             <label htmlFor="task-tag">Tag</label>
             {/* TODO: Create multiselect for tags */}
