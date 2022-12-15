@@ -1,16 +1,19 @@
-import {Route, Routes} from 'react-router-dom';
-import Sidebar from './pages/Sidebar';
-import TodayPage from './pages/TodayPage';
-import ImportantPage from './pages/ImportantPage';
-import TodoPage from './pages/TodoPage';
-import CalendarPage from './pages/CalendarPage';
-import Navbar from './pages/Navbar';
-import NewTask from './components/NewTask';
-import NewTag from './components/NewTag';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { QueryClientProvider, QueryClient } from "react-query";
+import Sidebar from "./pages/Sidebar";
+import TodayPage from "./pages/TodayPage";
+import ImportantPage from "./pages/ImportantPage";
+import TodoPage from "./pages/TodoPage";
+import CalendarPage from "./pages/CalendarPage";
+import Navbar from "./pages/Navbar";
+import NewTask from "./components/NewTask";
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <div className="flex flex-col">
         <Navbar />
         <div className="flex">
@@ -24,7 +27,7 @@ function App() {
           </Routes>
         </div>
       </div>
-    </>
+    </QueryClientProvider>
   );
 }
 

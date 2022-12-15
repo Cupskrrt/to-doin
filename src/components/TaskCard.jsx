@@ -1,45 +1,65 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from "react";
+import getTask from "../utils/api/getTask";
+import NewTask from "../components/NewTask";
 import {
   PencilSquareIcon,
   TrashIcon,
   StarIcon,
-} from '@heroicons/react/24/outline';
-import {StarIcon as StarIconSolid} from '@heroicons/react/24/solid';
+} from "@heroicons/react/24/outline";
+import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 
 const TaskCard = () => {
-  const [icon, setIcon] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [fav, setFav] = useState(false);
 
-  useEffect(() => {
-    switch (icon) {
-      case true:
-        // Create set favorite to db
-        break;
-      case false:
-        // Create unset favorite to db
-        break;
-    }
-  });
+  const isHidden = () => {
+    setHidden(!hidden);
+  };
 
+  const { data } = getTask();
+  //TODO: Create the rest of form input
   return (
     <>
-      <div className="flex justify-between items-center border-2 gap-10 p-4 w-[80vw]">
-        <div className="flex flex-col">
-          <h2 className="font-bold">Task</h2>
-          <p className="text-xs">Task Date</p>
-        </div>
-        <div className="flex flex-col">
-          <p className="text-xs">Tags</p>
-          <p className="text-sm text-green-500"># Completed</p>
-        </div>
-        <div className="flex gap-2">
-          <button className="w-[1.5rem]" onClick={() => setIcon(!icon)}>
-            {!icon && <StarIcon />}
-            {icon && <StarIconSolid />}
-          </button>
-          <PencilSquareIcon className="w-[1.5rem]" />
-          <TrashIcon className="w-[1.5rem]" />
-        </div>
-      </div>
+      {data?.data.map((item) => {
+        return (
+          <div
+            key={item._id}
+            className="flex justify-between items-center w-[80vw] p-3 border-2 rounded-xl"
+          >
+            <div>
+              <h2>{item.title}</h2>
+              <p>Task Date</p>
+            </div>
+            <p>Tags</p>
+            <div className="flex gap-5">
+              <PencilSquareIcon className="w-[1.5rem]" />
+              {/* TODO: Remake this to set fav for important*/}
+              {fav ? (
+                <StarIconSolid
+                  className="w-[1.5rem]"
+                  onClick={(e) => setFav(!fav)}
+                />
+              ) : (
+                <StarIcon
+                  className="w-[1.5rem]"
+                  onClick={(e) => setFav(!fav)}
+                />
+              )}
+              <TrashIcon className="w-[1.5rem]" />
+            </div>
+          </div>
+        );
+      })}
+      {hidden ? (
+        <NewTask popup={isHidden} />
+      ) : (
+        <p
+          onClick={isHidden}
+          className="hover:cursor-pointer border-2 rounded-xl w-[80vw] text-center p-3"
+        >
+          Add New Task +
+        </p>
+      )}
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import {HashtagIcon} from '@heroicons/react/24/outline';
+import { HashtagIcon } from '@heroicons/react/24/outline';
 import TagItem from './TagItem';
 
 const Tags = () => {

@@ -8,7 +8,6 @@ const TodayPage = () => {
         {/* TODO: Make the title sticky */}
         <h1 className="font-bold">Today Page</h1>
         <TaskCard />
-        <TaskCard /> <TaskCard /> 
       </div>
     </>
   );

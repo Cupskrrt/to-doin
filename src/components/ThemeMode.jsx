@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {SunIcon, MoonIcon} from '@heroicons/react/24/outline';
+import React, { useEffect, useState } from 'react';
+import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
 
 const ThemeMode = () => {
   const [icon, setIcon] = useState(false);
