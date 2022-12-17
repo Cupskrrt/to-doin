@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import getTask from "../utils/api/getTask";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { getTask, deleteTask } from "../utils/api/taskApi";
 import NewTask from "../components/NewTask";
 import {
   PencilSquareIcon,
@@ -16,7 +17,15 @@ const TaskCard = () => {
     setHidden(!hidden);
   };
 
-  const { data } = getTask();
+  const qc = useQueryClient();
+
+  const { data } = useQuery("task", getTask);
+  const deleteTaskMutation = useMutation(deleteTask, {
+    onSuccess: () => {
+      qc.invalidateQueries("task");
+    },
+  });
+
   //TODO: Create the rest of form input
   return (
     <>
@@ -45,7 +54,10 @@ const TaskCard = () => {
                   onClick={(e) => setFav(!fav)}
                 />
               )}
-              <TrashIcon className="w-[1.5rem]" />
+              <TrashIcon
+                className="w-[1.5rem] hover:cursor-pointer"
+                onClick={(e) => deleteTaskMutation.mutate({ id: item._id })}
+              />
             </div>
           </div>
         );
@@ -55,7 +67,7 @@ const TaskCard = () => {
       ) : (
         <p
           onClick={isHidden}
-          className="hover:cursor-pointer border-2 rounded-xl w-[80vw] text-center p-3"
+          className="sticky bottom-0 hover:cursor-pointer border-2 rounded-xl w-[80vw] text-center p-3 bg-white"
         >
           Add New Task +
         </p>

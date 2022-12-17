@@ -1,40 +1,35 @@
-import axios from "axios"
-import { useMutation, useQueryClient } from "react-query"
+import axios from "axios";
+import { useMutation, useQueryClient } from "react-query";
 
 const task = (task) => {
-  return axios.post('http://localhost:5011/task', {
-    title: task.title
-  })
-}
+  return axios.post("http://localhost:5011/task", {
+    title: task.title,
+  });
+};
 
 const createTask = () => {
-  const qc = useQueryClient()
+  const qc = useQueryClient();
   return useMutation(task, {
-    /* onSuccess: (data) => {
-      //qc.invalidateQueries('task')
-    }*/
     onMutate: async (newTask) => {
-      await qc.cancelQueries('task')
-      const prevData = qc.getQueryData('task')
-      qc.setQueryData('task', (oldData) => {
+      await qc.cancelQueries("task");
+      const prevData = qc.getQueryData("task");
+      qc.setQueryData("task", (oldData) => {
         return {
           ...oldData,
-          data: [...oldData.data, { ...newTask }]
-        }
-      })
+          data: [...oldData.data, { ...newTask }],
+        };
+      });
       return {
         prevData,
-      }
-
+      };
     },
     onError: (_error, _task, context) => {
-      qc.setQueryData('task', context.prevData)
+      qc.setQueryData("task", context.prevData);
     },
     onSettled: () => {
-      qc.invalidateQueries('task')
-    }
-  })
+      qc.invalidateQueries("task");
+    },
+  });
+};
 
-}
-
-export default createTask
+export default createTask;
