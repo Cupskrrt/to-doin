@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const taskApi = axios.create({
-  baseURL: "http://localhost:5011",
+  baseURL: "http://localhost:5011/api",
 });
 
 export const getTask = async () => {
@@ -19,6 +19,11 @@ export const patchTask = async (task) => {
 
 export const deleteTask = async ({ id }) => {
   return await taskApi.delete(`/task/${id}`, id);
+};
+
+export const countTask = async () => {
+  const res = await taskApi.get("/task/count");
+  return res;
 };
 
 export default taskApi;

@@ -1,2 +1,6 @@
 GET http://localhost:5011/task
 DELETE http://localhost:5011/task/639b406a993f76616faa62ae
+PUT http://localhost:5011/task/639dd14841a73ab43d058102
+{
+ "title": "test update"
+}

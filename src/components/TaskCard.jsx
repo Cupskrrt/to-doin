@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getTask, deleteTask } from "../utils/api/taskApi";
+import { getTask, deleteTask, patchTask } from "../utils/api/taskApi";
 import NewTask from "../components/NewTask";
 import {
   PencilSquareIcon,
@@ -10,23 +10,24 @@ import {
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 
 const TaskCard = () => {
+  const qc = useQueryClient();
+
   const [hidden, setHidden] = useState(false);
-  const [fav, setFav] = useState(false);
 
   const isHidden = () => {
     setHidden(!hidden);
   };
 
-  const qc = useQueryClient();
-
   const { data } = useQuery("task", getTask);
+
   const deleteTaskMutation = useMutation(deleteTask, {
-    onSuccess: () => {
-      qc.invalidateQueries("task");
-    },
+    onSuccess: () => qc.invalidateQueries("task"),
   });
 
-  //TODO: Create the rest of form input
+  const updateTaskMutation = useMutation(patchTask, {
+    onSuccess: () => qc.invalidateQueries("task"),
+  });
+
   return (
     <>
       {data?.data.map((item) => {
@@ -37,21 +38,32 @@ const TaskCard = () => {
           >
             <div>
               <h2>{item.title}</h2>
-              <p>Task Date</p>
+              <p>{item.date ? item.date : "date"}</p>
             </div>
             <p>Tags</p>
             <div className="flex gap-5">
               <PencilSquareIcon className="w-[1.5rem]" />
-              {/* TODO: Remake this to set fav for important*/}
-              {fav ? (
+              {item.important ? (
                 <StarIconSolid
                   className="w-[1.5rem]"
-                  onClick={(e) => setFav(!fav)}
+                  id={item._id}
+                  onClick={(e) =>
+                    updateTaskMutation.mutate({
+                      id: item._id,
+                      important: false,
+                    })
+                  }
                 />
               ) : (
                 <StarIcon
                   className="w-[1.5rem]"
-                  onClick={(e) => setFav(!fav)}
+                  id={item._id}
+                  onClick={(e) =>
+                    e.updateTaskMutation.mutate({
+                      id: item._id,
+                      important: true,
+                    })
+                  }
                 />
               )}
               <TrashIcon

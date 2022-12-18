@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
-import { getTask, addTask, patchTask, deleteTask } from "../utils/api/taskApi";
+import { useMutation, useQueryClient } from "react-query";
+import { addTask } from "../utils/api/taskApi";
 
 const NewTask = ({ popup }) => {
   const [title, setTitle] = useState("");
+  const [important, setImportant] = useState(false);
   const qc = useQueryClient();
 
   const addTaskMutation = useMutation(addTask, {
@@ -12,22 +13,9 @@ const NewTask = ({ popup }) => {
     },
   });
 
-  const patchTaskMutation = useMutation(patchTask, {
-    onSuccess: () => {
-      qc.invalidateQueries("task");
-    },
-  });
-
-  const deleteTaskMutation = useMutation(deleteTask, {
-    onSuccess: () => {
-      qc.invalidateQueries("task");
-    },
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    addTaskMutation.mutate({ title: title });
-    setTitle("");
+    addTaskMutation.mutate({ title: title, important: important });
     popup();
   };
 
@@ -46,6 +34,8 @@ const NewTask = ({ popup }) => {
           placeholder="Task"
           autoFocus
         />
+        <label>Important</label>
+        <input type="checkbox" onClick={(e) => setImportant(!important)} />
       </form>
     </>
   );
