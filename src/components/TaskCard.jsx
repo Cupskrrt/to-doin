@@ -42,7 +42,7 @@ const TaskCard = () => {
             </div>
             <p>Tags</p>
             <div className="flex gap-5">
-              <PencilSquareIcon className="w-[1.5rem]" />
+              <PencilSquareIcon className="w-[1.5rem] hover:cursor-pointer" />
               {item.important ? (
                 <StarIconSolid
                   className="w-[1.5rem]"
@@ -56,10 +56,10 @@ const TaskCard = () => {
                 />
               ) : (
                 <StarIcon
-                  className="w-[1.5rem]"
+                  className="w-[1.5rem] hover:cursor-pointer"
                   id={item._id}
                   onClick={(e) =>
-                    e.updateTaskMutation.mutate({
+                    updateTaskMutation.mutate({
                       id: item._id,
                       important: true,
                     })
