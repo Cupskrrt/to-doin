@@ -6,8 +6,6 @@ import Important from "../components/Important";
 import Todo from "../components/Todo";
 import Calendar from "../components/Calendar";
 import Tags from "../components/Tags";
-import AddTag from "../components/AddTag";
-import NewTag from "../components/NewTag";
 
 const Sidebar = () => {
   const [tagShow, setTagShow] = useState(false);
@@ -50,8 +48,6 @@ const Sidebar = () => {
         <hr />
         <div>
           <Tags />
-          {tagShow && <NewTag />}
-          <AddTag onClick={showTag} />
         </div>
         <ThemeMode />
       </div>
