@@ -4,7 +4,6 @@ import ThemeMode from "../components/ThemeMode";
 import Today from "../components/Today";
 import Important from "../components/Important";
 import Todo from "../components/Todo";
-import Calendar from "../components/Calendar";
 import Tags from "../components/Tags";
 
 const Sidebar = () => {
@@ -12,10 +11,6 @@ const Sidebar = () => {
 
   const normalLink = "";
   const activeLink = "border-l-[2px] border-black";
-
-  function showTag() {
-    setTagShow(!tagShow);
-  }
 
   return (
     <div className="w-[15vw] h-[92vh] border-r-2">
@@ -38,12 +33,6 @@ const Sidebar = () => {
           className={({ isActive }) => (isActive ? activeLink : normalLink)}
         >
           <Important />
-        </NavLink>
-        <NavLink
-          to="/calendar"
-          className={({ isActive }) => (isActive ? activeLink : normalLink)}
-        >
-          <Calendar />
         </NavLink>
         <hr />
         <div>

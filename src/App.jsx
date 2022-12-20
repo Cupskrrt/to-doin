@@ -5,11 +5,10 @@ import Sidebar from "./pages/Sidebar";
 import TodayPage from "./pages/TodayPage";
 import ImportantPage from "./pages/ImportantPage";
 import TodoPage from "./pages/TodoPage";
-import CalendarPage from "./pages/CalendarPage";
 import Navbar from "./pages/Navbar";
 import NewTask from "./components/NewTask";
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 function App() {
   return (
@@ -22,7 +21,6 @@ function App() {
             <Route path="/" element={<TodayPage />} />
             <Route path="/important" element={<ImportantPage />} />
             <Route path="/to-do" element={<TodoPage />} />
-            <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/newtask" element={<NewTask />} />
           </Routes>
         </div>

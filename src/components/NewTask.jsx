@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { addTask } from "../utils/api/taskApi";
+import Select from "react-select";
 import tags from "../utils/tags.js";
 
 const NewTask = ({ popup }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
-  const [tags, setTags] = useState("");
+  const [tag, setTag] = useState("");
   const [important, setImportant] = useState(false);
   const qc = useQueryClient();
 
@@ -22,10 +23,17 @@ const NewTask = ({ popup }) => {
       title: title,
       important: important,
       date: date,
-      tags: tags,
+      tag: tag,
     });
     popup();
   };
+
+  const options = tags.map((tag) => {
+    return {
+      value: tag.title,
+      label: tag.title,
+    };
+  });
 
   return (
     <>
@@ -49,23 +57,10 @@ const NewTask = ({ popup }) => {
           />
         </div>
         {/*TAGS PAGE*/}
-        <select name="tags">
-          {tags
-            ? tags.map((tag) => {
-                return (
-                  <option
-                    key={`${tag.title}`}
-                    value={tags}
-                    onChange={(e) => setTags(e.target.value)}
-                  >
-                    {tag.title}
-                  </option>
-                );
-              })
-            : ""}
-        </select>
+        <Select options={options} onChange={(e) => setTag(e.value)} />
         <label>Important</label>
         <input type="checkbox" onClick={(e) => setImportant(!important)} />
+        <button onClick={handleSubmit}>submit</button>
       </form>
     </>
   );

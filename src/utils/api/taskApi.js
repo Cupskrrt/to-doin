@@ -21,8 +21,18 @@ export const deleteTask = async ({ id }) => {
   return await taskApi.delete(`/task/${id}`, id);
 };
 
-export const countTask = async () => {
-  const res = await taskApi.get("/task/count");
+export const getCountTaskTodo = async () => {
+  const res = await taskApi.get("/task/count/to-do");
+  return res;
+};
+
+export const getCountTaskImportant = async () => {
+  const res = await taskApi.get("/task/count/important");
+  return res;
+};
+
+export const getCountTaskToday = async () => {
+  const res = await taskApi.get("/task/count/today");
   return res;
 };
 
