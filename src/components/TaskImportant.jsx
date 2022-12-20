@@ -1,12 +1,12 @@
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getTodayTask, deleteTask, patchTask } from "../utils/api/taskApi";
+import { getImportantTask, deleteTask, patchTask } from "../utils/api/taskApi";
 import { TrashIcon, StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 
-const TaskToday = () => {
+const TaskImportant = () => {
   const qc = useQueryClient();
-  const { data } = useQuery("task", getTodayTask);
+  const { data } = useQuery("task", getImportantTask);
   const deleteTaskMutation = useMutation(deleteTask, {
     onSuccess: () => qc.invalidateQueries("task"),
   });
@@ -69,4 +69,4 @@ const TaskToday = () => {
   );
 };
 
-export default TaskToday;
+export default TaskImportant;

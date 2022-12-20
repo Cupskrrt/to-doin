@@ -11,7 +11,7 @@ const TaskCard = () => {
 
   return (
     <>
-      <Task get="All" />
+      <Task />
       {newTask ? (
         <NewTask popup={isHidden} />
       ) : (

@@ -9,6 +9,16 @@ export const getTask = async () => {
   return res;
 };
 
+export const getImportantTask = async () => {
+  const res = await taskApi.get("/task/important");
+  return res;
+};
+
+export const getTodayTask = async () => {
+  const res = await taskApi.get("/task/today");
+  return res;
+};
+
 export const addTask = async (task) => {
   return await taskApi.post("/task", task);
 };
