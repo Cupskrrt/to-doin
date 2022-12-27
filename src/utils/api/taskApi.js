@@ -46,4 +46,19 @@ export const getCountTaskToday = async () => {
   return res;
 };
 
+export const getTaskCompleted = async () => {
+  const res = await taskApi.get("/task/completed");
+  return res;
+};
+
+export const getTaskOngoing = async () => {
+  const res = await taskApi.get("/task/ongoing");
+  return res;
+};
+
+export const getTaskNotStarted = async () => {
+  const res = await taskApi.get("/task/not-started");
+  return res;
+};
+
 export default taskApi;

@@ -1,12 +1,12 @@
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getTask, deleteTask, patchTask } from "../utils/api/taskApi";
+import { getTaskCompleted, deleteTask, patchTask } from "../utils/api/taskApi";
 import { TrashIcon, StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 
-const Task = () => {
+const TaskCompleted = () => {
   const qc = useQueryClient();
-  const { data } = useQuery("task", getTask);
+  const { data } = useQuery("taskCompleted", getTaskCompleted);
   const deleteTaskMutation = useMutation(deleteTask, {
     onSuccess: () => qc.invalidateQueries("task"),
   });
@@ -14,8 +14,6 @@ const Task = () => {
   const updateTaskMutation = useMutation(patchTask, {
     onSuccess: () => qc.invalidateQueries("task"),
   });
-
-  //TODO: FIGURE OUT HOW TO MAKE THIS TASK INTO A GENERIC TASK TEMPLATE
 
   return (
     <>
@@ -71,4 +69,4 @@ const Task = () => {
   );
 };
 
-export default Task;
+export default TaskCompleted;

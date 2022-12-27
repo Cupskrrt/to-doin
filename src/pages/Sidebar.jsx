@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import ThemeMode from "../components/ThemeMode";
 import Today from "../components/Today";
@@ -7,14 +7,11 @@ import Todo from "../components/Todo";
 import Tags from "../components/Tags";
 
 const Sidebar = () => {
-  const [tagShow, setTagShow] = useState(false);
-
   const normalLink = "";
   const activeLink = "border-l-[2px] border-black";
 
   return (
     <div className="w-[15vw] h-[92vh] border-r-2">
-      {/* TODO: Change the Link into NavLink */}
       <div className="flex flex-col gap-7 p-5 mt-2">
         <NavLink
           to="/"
