@@ -1,18 +1,18 @@
 import React from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getTask, deleteTask, patchTask } from "../utils/api/taskApi";
+import { deleteTask, patchTask } from "../utils/api/taskApi";
 import { TrashIcon, StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 
-const Task = () => {
+const Task = ({ task, query }) => {
   const qc = useQueryClient();
-  const { data } = useQuery("task", getTask);
+  const { data } = useQuery(`${task}`, query);
   const deleteTaskMutation = useMutation(deleteTask, {
-    onSuccess: () => qc.invalidateQueries("task"),
+    onSuccess: () => qc.invalidateQueries(`${task}`),
   });
 
   const updateTaskMutation = useMutation(patchTask, {
-    onSuccess: () => qc.invalidateQueries("task"),
+    onSuccess: () => qc.invalidateQueries(`${task}`),
   });
 
   //TODO: FIGURE OUT HOW TO MAKE THIS TASK INTO A GENERIC TASK TEMPLATE
