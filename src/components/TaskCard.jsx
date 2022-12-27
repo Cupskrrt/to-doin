@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NewTask from "../components/NewTask";
 import Task from "./Task";
 
-const TaskCard = () => {
+const TaskCard = ({ query, task }) => {
   const [newTask, setNewTask] = useState(false);
 
   const isHidden = () => {
@@ -11,7 +11,7 @@ const TaskCard = () => {
 
   return (
     <>
-      <Task />
+      <Task query={query} task={`${task}`} />
       {newTask ? (
         <NewTask popup={isHidden} />
       ) : (
