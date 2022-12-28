@@ -5,13 +5,12 @@ import tags from "../utils/tags.js";
 
 const TagItem = () => {
   return (
-    //TODO: FIGURE OUT HOW TO LINK TAG ITEM TO THE RESPECTIVE UI
     <>
       {tags
         ? tags.map((tag) => {
             return (
               <div key={tag.title} className={ColorConfig[`${tag.color}`]}>
-                <NavLink to="/" className="text-xs">
+                <NavLink to={`/tag/${tag.title}`} className="text-xs">
                   {tag.title}
                 </NavLink>
               </div>
