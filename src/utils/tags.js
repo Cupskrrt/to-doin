@@ -1,14 +1,15 @@
 const tags = [
+  //TODO: REMOVE THIS FILE AND MAKE NEW COLLECTION IN MONGO
   {
-    title: "#Completed",
+    title: "Completed",
     color: "green",
   },
   {
-    title: "#Ongoing",
+    title: "Ongoing",
     color: "yellow",
   },
   {
-    title: "#Not started",
+    title: "Not started",
     color: "red",
   },
 ];
