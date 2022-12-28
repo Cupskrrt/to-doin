@@ -6,8 +6,7 @@ import TodayPage from "./pages/TodayPage";
 import ImportantPage from "./pages/ImportantPage";
 import TodoPage from "./pages/TodoPage";
 import Navbar from "./pages/Navbar";
-import NewTask from "./components/NewTask";
-import TaskCompleted from "./components/TaskCompleted.jsx";
+import TagsPage from "./pages/TagsPage";
 
 const queryClient = new QueryClient();
 
@@ -23,8 +22,7 @@ function App() {
             <Route path="/" element={<TodayPage />} />
             <Route path="/important" element={<ImportantPage />} />
             <Route path="/to-do" element={<TodoPage />} />
-            <Route path="/newtask" element={<NewTask />} />
-            <Route path="/completed" element={<TaskCompleted />} />
+            <Route path="/tag/:tagId" element={<TagsPage />} />
           </Routes>
         </div>
       </div>
