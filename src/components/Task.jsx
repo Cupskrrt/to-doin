@@ -33,7 +33,7 @@ const Task = ({ task, query }) => {
             </div>
             <div>
               <p>Tags</p>
-              <p>{item.tag ? item.tag : "tag"}</p>
+              <p>{item.tag.name}</p>
             </div>
             <div className="flex gap-5">
               {item.important ? (
