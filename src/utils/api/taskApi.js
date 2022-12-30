@@ -46,8 +46,8 @@ export const getCountTaskToday = async () => {
   return res;
 };
 
-export const getTaskbyTag = async ({ id }) => {
-  const res = await taskApi.get(`/task/${id}`);
+export const getTaskbyTag = async ({ tagId }) => {
+  const res = await taskApi.get(`/task/${tagId}`);
   return res;
 };
 
