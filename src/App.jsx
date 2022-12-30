@@ -7,6 +7,7 @@ import ImportantPage from "./pages/ImportantPage";
 import TodoPage from "./pages/TodoPage";
 import Navbar from "./pages/Navbar";
 import TagsPage from "./pages/TagsPage";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ function App() {
           </Routes>
         </div>
       </div>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
