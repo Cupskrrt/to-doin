@@ -15,8 +15,6 @@ const Task = ({ task, query }) => {
     onSuccess: () => qc.invalidateQueries(`${task}`),
   });
 
-  //TODO: FIGURE OUT HOW TO MAKE THIS TASK INTO A GENERIC TASK TEMPLATE
-
   return (
     <>
       {data?.data.map((item) => {
