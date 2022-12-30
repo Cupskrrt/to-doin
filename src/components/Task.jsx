@@ -1,19 +1,19 @@
 import React from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { deleteTask, patchTask } from "../utils/api/taskApi";
 import { TrashIcon, StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 
-const Task = ({ task, query }) => {
+const Task = ({ query }) => {
   const qc = useQueryClient();
-  const { data } = useQuery(`${task}`, query);
+  const { data, isLoading, isError } = query;
   console.log(data);
   const deleteTaskMutation = useMutation(deleteTask, {
-    onSuccess: () => qc.invalidateQueries(`${task}`),
+    onSuccess: () => qc.invalidateQueries("task"),
   });
 
   const updateTaskMutation = useMutation(patchTask, {
-    onSuccess: () => qc.invalidateQueries(`${task}`),
+    onSuccess: () => qc.invalidateQueries("task"),
   });
 
   return (
