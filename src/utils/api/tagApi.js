@@ -10,5 +10,9 @@ export const getTag = async () => {
 };
 
 export const addTag = async (tag) => {
-  return await tagApi.post("/", tag);
+  return await tagApi.post("/tag", tag);
+};
+
+export const deleteTag = async ({ id }) => {
+  return await tagApi.delete(`/tag/${id}`, id);
 };
