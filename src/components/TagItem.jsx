@@ -1,7 +1,7 @@
 import React from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { getTag } from "../utils/api/tagApi.js";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ColorConfig from "../utils/ColorProfile.js";
 
 const TagItem = () => {
@@ -11,9 +11,9 @@ const TagItem = () => {
       {data?.data.map((tag) => {
         return (
           <div key={tag.title} className={ColorConfig[`${tag.color}`]}>
-            <NavLink to={`/tag/${tag._id}`} className="text-xs">
+            <Link to={`/tag/${tag._id}`} className="text-xs">
               {tag.title}
-            </NavLink>
+            </Link>
           </div>
         );
       })}
