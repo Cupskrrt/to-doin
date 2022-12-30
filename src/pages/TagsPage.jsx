@@ -11,7 +11,7 @@ const TagsPage = () => {
     <>
       <div className="flex flex-col items-center p-4 gap-5 w-[85vw] h-[90vh] overflow-y-auto dark:bg-gray-800 dark:text-white">
         <h1 className="font-bold">{tagId}</h1>
-        <TaskCard task="taskTag" query={getTaskbyTag({ id: tagId })} />
+        <TaskCard task="taskTag" query={getTaskbyTag({ tagId })} />
       </div>
     </>
   );
