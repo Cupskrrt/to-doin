@@ -6,16 +6,27 @@ export const getTagQuery = () => {
   return { data, isLoading, isError };
 };
 
-export const addTagQuery = (name) => {
+export const addTagQuery = () => {
   const qc = useQueryClient();
-  const addTagMutation = useMutation(addTag, {
-    onSuccess: () => {
+  return useMutation(addTag, {
+    onMutate: async (newTag) => {
+      await qc.cancelQueries("tag");
+      const prevData = qc.getQueryData("tag");
+      qc.setQueryData("tag", (oldData) => {
+        return {
+          ...oldData,
+          data: [...oldData.data, newTag],
+        };
+      });
+      return {
+        prevData,
+      };
+    },
+    onError: (_error, _tag, context) => {
+      qc.setQueryData("tag", context.prevData);
+    },
+    onSettled: () => {
       qc.invalidateQueries("tag");
     },
-  });
-
-  addTagMutation.mutate({
-    title: name,
-    name: name,
   });
 };
