@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { addTask } from "../utils/api/taskApi";
+import { getTagQuery } from "../utils/queries/tagQuery.js";
 import Select from "react-select";
-import tags from "../utils/tags.js";
 
 const NewTask = ({ popup }) => {
   const [title, setTitle] = useState("");
@@ -28,10 +28,12 @@ const NewTask = ({ popup }) => {
     popup();
   };
 
-  const options = tags.map((tag) => {
+  const { data } = getTagQuery();
+
+  const options = data?.data.map((tag) => {
     return {
-      value: tag.title,
-      label: tag.title,
+      value: tag._id,
+      label: tag.name,
     };
   });
 
