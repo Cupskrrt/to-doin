@@ -1,20 +1,14 @@
 import React, { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
-import { addTag } from "../utils/api/tagApi.js";
+import { addTagQuery } from "../utils/queries/tagQuery.js";
 
 const NewTag = ({ popup }) => {
   const [name, setName] = useState("");
-  const qc = useQueryClient();
 
-  const addTagMutations = useMutation(addTag, {
-    onSuccess: () => {
-      qc.invalidateQueries("tag");
-    },
-  });
+  const { mutate } = addTagQuery();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    addTagMutations.mutate({
+    mutate({
       title: name,
       name,
     });

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
-import { addTask } from "../utils/api/taskApi";
+import { addTaskQuery } from "../utils/queries/taskQuery.js";
 import { getTagQuery } from "../utils/queries/tagQuery.js";
 import Select from "react-select";
 
@@ -9,17 +8,12 @@ const NewTask = ({ popup }) => {
   const [date, setDate] = useState("");
   const [tag, setTag] = useState("");
   const [important, setImportant] = useState(false);
-  const qc = useQueryClient();
 
-  const addTaskMutation = useMutation(addTask, {
-    onSuccess: () => {
-      qc.invalidateQueries("task");
-    },
-  });
+  const { mutate } = addTaskQuery();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    addTaskMutation.mutate({
+    mutate({
       title: title,
       important: important,
       date: date,

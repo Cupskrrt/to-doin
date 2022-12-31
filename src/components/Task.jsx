@@ -1,19 +1,15 @@
 import React from "react";
-import { useMutation, useQueryClient } from "react-query";
-import { deleteTask, patchTask } from "../utils/api/taskApi";
+import {
+  deleteTaskQuery,
+  updateTaskQuery,
+} from "../utils/queries/taskQuery.js";
 import { TrashIcon, StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 
 const Task = ({ query }) => {
-  const qc = useQueryClient();
   const { data, isLoading, isError } = query;
-  const deleteTaskMutation = useMutation(deleteTask, {
-    onSuccess: () => qc.invalidateQueries("task"),
-  });
-
-  const updateTaskMutation = useMutation(patchTask, {
-    onSuccess: () => qc.invalidateQueries("task"),
-  });
+  const { mutate: updateTask } = updateTaskQuery();
+  const { mutate: deleteTask } = deleteTaskQuery();
 
   return (
     <>
@@ -30,16 +26,16 @@ const Task = ({ query }) => {
               </p>
             </div>
             <div>
-              <p>Tags</p>
+              <p>Tag</p>
               <p>{item.tag.name}</p>
             </div>
             <div className="flex gap-5">
               {item.important ? (
                 <StarIconSolid
-                  className="w-[1.5rem]"
+                  className="w-[1.5rem] hover:cursor-pointer"
                   id={item._id}
                   onClick={(e) =>
-                    updateTaskMutation.mutate({
+                    updateTask({
                       id: item._id,
                       important: false,
                     })
@@ -50,7 +46,7 @@ const Task = ({ query }) => {
                   className="w-[1.5rem] hover:cursor-pointer"
                   id={item._id}
                   onClick={(e) =>
-                    updateTaskMutation.mutate({
+                    updateTask({
                       id: item._id,
                       important: true,
                     })
@@ -59,7 +55,7 @@ const Task = ({ query }) => {
               )}
               <TrashIcon
                 className="w-[1.5rem] hover:cursor-pointer"
-                onClick={(e) => deleteTaskMutation.mutate({ id: item._id })}
+                onClick={(e) => deleteTask({ id: item._id })}
               />
             </div>
           </div>
