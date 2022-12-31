@@ -6,42 +6,79 @@ import {
   getCountTaskTodo,
   getCountTaskImportant,
   getCountTaskToday,
+  addTask,
+  patchTask,
+  deleteTask,
 } from "../api/taskApi.js";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient, useMutation } from "react-query";
 
 export const getTaskQuery = () => {
-  const { data, isLoading, isError } = useQuery("task", getTask);
-  return { data, isLoading, isError };
+  return useQuery("task", getTask);
 };
 
 export const getImportantTaskQuery = () => {
-  const { data, isLoading, isError } = useQuery("task", getImportantTask);
-  return { data, isLoading, isError };
+  return useQuery("task", getImportantTask);
 };
 
 export const getTodayTaskQuery = () => {
-  const { data, isLoading, isError } = useQuery("task", getTodayTask);
-  return { data, isLoading, isError };
+  return useQuery("task", getTodayTask);
 };
 
 export const getTaskbyTagQuery = (tagId) => {
-  const { data, isLoading, isError } = useQuery(["task", tagId], () =>
-    getTaskbyTag(tagId)
-  );
-  return { data, isLoading, isError };
+  return useQuery(["task", tagId], () => getTaskbyTag(tagId));
 };
 
 export const getCountTaskTodoQuery = () => {
-  const { data, isLoading } = useQuery("countTodo", getCountTaskTodo);
-  return { data, isLoading };
+  return useQuery("countTodo", getCountTaskTodo);
 };
 
 export const getCountTaskImportantQuery = () => {
-  const { data, isLoading } = useQuery("countImportant", getCountTaskImportant);
-  return { data, isLoading };
+  return useQuery("countImportant", getCountTaskImportant);
 };
 
 export const getCountTaskTodayQuery = () => {
-  const { data, isLoading } = useQuery("countToday", getCountTaskToday);
-  return { data, isLoading };
+  return useQuery("countToday", getCountTaskToday);
+};
+
+export const addTaskQuery = () => {
+  const qc = useQueryClient();
+  return useMutation(addTask, {
+    onMutate: async (newTask) => {
+      await qc.cancelQueries("task");
+      const prevData = qc.getQueryData("task");
+      qc.setQueryData("task", (oldData) => {
+        return {
+          ...oldData,
+          data: [...oldData.data, newTask],
+        };
+      });
+      return {
+        prevData,
+      };
+    },
+    onError: (_error, _task, context) => {
+      qc.setQueryData("task", context.prevData);
+    },
+    onSettled: () => {
+      qc.invalidateQueries("task");
+    },
+  });
+};
+
+export const updateTaskQuery = () => {
+  const qc = useQueryClient();
+  return useMutation(patchTask, {
+    onSuccess: () => {
+      qc.invalidateQueries("task");
+    },
+  });
+};
+
+export const deleteTaskQuery = () => {
+  const qc = useQueryClient();
+  return useMutation(deleteTask, {
+    onSuccess: () => {
+      qc.invalidateQueries("task");
+    },
+  });
 };
