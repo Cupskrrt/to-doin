@@ -3,6 +3,9 @@ import {
   getTask,
   getTodayTask,
   getTaskbyTag,
+  getCountTaskTodo,
+  getCountTaskImportant,
+  getCountTaskToday,
 } from "../api/taskApi.js";
 import { useQuery } from "react-query";
 
@@ -26,4 +29,19 @@ export const getTaskbyTagQuery = (tagId) => {
     getTaskbyTag(tagId)
   );
   return { data, isLoading, isError };
+};
+
+export const getCountTaskTodoQuery = () => {
+  const { data, isLoading } = useQuery("countTodo", getCountTaskTodo);
+  return { data, isLoading };
+};
+
+export const getCountTaskImportantQuery = () => {
+  const { data, isLoading } = useQuery("countImportant", getCountTaskImportant);
+  return { data, isLoading };
+};
+
+export const getCountTaskTodayQuery = () => {
+  const { data, isLoading } = useQuery("countToday", getCountTaskToday);
+  return { data, isLoading };
 };
