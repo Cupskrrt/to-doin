@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { addTag } from "../utils/api/tagApi.js";
 
-const NewTag = () => {
+const NewTag = ({ popup }) => {
   const [name, setName] = useState("");
   const qc = useQueryClient();
 
   const addTagMutations = useMutation(addTag, {
     onSuccess: () => {
-      qc.invalidateQueries;
+      qc.invalidateQueries("tag");
     },
   });
 
@@ -18,6 +18,7 @@ const NewTag = () => {
       title: name,
       name,
     });
+    popup();
   };
 
   return (

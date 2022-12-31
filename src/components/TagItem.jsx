@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { getTagQuery } from "../utils/queries/tagQuery.js";
 import { Link } from "react-router-dom";
-import ColorConfig from "../utils/ColorProfile.js";
 import NewTag from "../components/NewTag.jsx";
 
 const TagItem = () => {
@@ -24,7 +23,7 @@ const TagItem = () => {
         );
       })}
       {newTag ? (
-        <NewTag />
+        <NewTag popup={isHidden} />
       ) : (
         <p
           onClick={isHidden}
