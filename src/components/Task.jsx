@@ -7,7 +7,6 @@ import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 const Task = ({ query }) => {
   const qc = useQueryClient();
   const { data, isLoading, isError } = query;
-  console.log(data);
   const deleteTaskMutation = useMutation(deleteTask, {
     onSuccess: () => qc.invalidateQueries("task"),
   });
