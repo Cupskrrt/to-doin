@@ -1,11 +1,11 @@
 import React from "react";
 import { BellIcon } from "@heroicons/react/24/outline";
-import { useQueryClient } from "react-query";
 import { getCountTaskTodayQuery } from "../utils/queries/taskQuery.js";
+import { useQueryClient } from "react-query";
 
 const Today = () => {
   const { data } = getCountTaskTodayQuery();
-  useQueryClient().invalidateQueries("count");
+  useQueryClient().invalidateQueries("countToday");
   return (
     <div className="flex justify-between items-center">
       <div className="flex gap-4">

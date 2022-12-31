@@ -1,11 +1,11 @@
 import React from "react";
 import { ClipboardIcon } from "@heroicons/react/24/outline";
 import { useQuery, useQueryClient } from "react-query";
-import { getCountTaskTodo } from "../utils/api/taskApi.js";
+import { getCountTaskTodoQuery } from "../utils/queries/taskQuery.js";
 
 const Todo = () => {
-  const { data } = useQuery("count", getCountTaskTodo);
-  useQueryClient().invalidateQueries("count");
+  const { data } = getCountTaskTodoQuery();
+  useQueryClient().invalidateQueries("countTodo");
   return (
     <>
       <div className="flex justify-between items-center">
