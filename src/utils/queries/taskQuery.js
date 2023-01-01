@@ -68,8 +68,20 @@ export const addTaskQuery = () => {
 export const updateTaskQuery = () => {
   const qc = useQueryClient();
   return useMutation(patchTask, {
-    onSuccess: () => {
-      qc.invalidateQueries("task");
+    onMutate: async (updatedTask) => {
+      await qc.cancelQueries(["task", updatedTask.important]);
+      const prevData = qc.getQueryData(["task", updatedTask.important]);
+      qc.setQueryData(["task", updatedTask.important], prevData);
+      return {
+        prevData,
+        updatedTask,
+      };
+    },
+    onError: (_error, updatedTask, context) => {
+      qc.setQueryData(["task", updatedTask.important], context.prevData);
+    },
+    onSettled: (updatedTask) => {
+      qc.invalidateQueries(["task", updatedTask.important]);
     },
   });
 };
