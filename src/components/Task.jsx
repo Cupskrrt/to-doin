@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   deleteTaskQuery,
   updateTaskQuery,
@@ -30,6 +30,7 @@ const Task = ({ query }) => {
               <p>{item.tag.name}</p>
             </div>
             <div className="flex gap-5">
+              {/* TODO: MAKE IMPORTANT ITEM AND DELETE ITEM OPTIMISTIC UPDATE  */}
               {item.important ? (
                 <StarIconSolid
                   className="w-[1.5rem] hover:cursor-pointer"
