@@ -1,4 +1,4 @@
-import { addTag, getTag } from "../api/tagApi.js";
+import { addTag, deleteTag, getTag } from "../api/tagApi.js";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export const getTagQuery = () => {
@@ -15,7 +15,7 @@ export const addTagQuery = () => {
       qc.setQueryData("tag", (oldData) => {
         return {
           ...oldData,
-          data: [...oldData.data, newTag],
+          data: [...oldData.data, newTag.name],
         };
       });
       return {
@@ -26,6 +26,15 @@ export const addTagQuery = () => {
       qc.setQueryData("tag", context.prevData);
     },
     onSettled: () => {
+      qc.invalidateQueries("tag");
+    },
+  });
+};
+
+export const deleteTagQuery = () => {
+  const qc = useQueryClient();
+  return useMutation(deleteTag, {
+    onSuccess: () => {
       qc.invalidateQueries("tag");
     },
   });
