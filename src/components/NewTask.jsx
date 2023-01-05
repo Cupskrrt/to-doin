@@ -52,7 +52,6 @@ const NewTask = ({ popup }) => {
             value={date}
           />
         </div>
-        {/*TAGS PAGE*/}
         <Select options={options} onChange={(e) => setTag(e.value)} />
         <label>Important</label>
         <input type="checkbox" onClick={(e) => setImportant(!important)} />

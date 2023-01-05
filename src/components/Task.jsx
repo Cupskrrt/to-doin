@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   deleteTaskQuery,
   updateTaskQuery,
@@ -7,7 +7,7 @@ import { TrashIcon, StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 
 const Task = ({ query }) => {
-  const { data, isLoading, isError } = query;
+  const { data } = query;
   const { mutate: updateTask } = updateTaskQuery();
   const { mutate: deleteTask } = deleteTaskQuery();
 
@@ -27,7 +27,7 @@ const Task = ({ query }) => {
             </div>
             <div>
               <p>Tag</p>
-              <p>{item.tag.name}</p>
+              <p>{item.tag ? item.tag.name : "Tag Deleted"}</p>
             </div>
             <div className="flex gap-5">
               {/* TODO: MAKE IMPORTANT ITEM AND DELETE ITEM OPTIMISTIC UPDATE  */}
@@ -38,7 +38,7 @@ const Task = ({ query }) => {
                   onClick={(e) =>
                     updateTask({
                       id: item._id,
-                      important: false,
+                      important: false ?? item.important,
                     })
                   }
                 />
@@ -49,7 +49,7 @@ const Task = ({ query }) => {
                   onClick={(e) =>
                     updateTask({
                       id: item._id,
-                      important: true,
+                      important: true ?? item.important,
                     })
                   }
                 />
