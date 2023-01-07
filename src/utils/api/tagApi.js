@@ -9,6 +9,10 @@ export const getTag = async () => {
   return res;
 };
 
+export const getTagById = async ({ id }) => {
+  return await tagApi.get(`/tag/${id}`, id);
+};
+
 export const addTag = async (tag) => {
   return await tagApi.post("/tag", tag);
 };

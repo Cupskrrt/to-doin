@@ -1,9 +1,13 @@
-import { addTag, deleteTag, getTag } from "../api/tagApi.js";
+import { addTag, deleteTag, getTag, getTagById } from "../api/tagApi.js";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export const getTagQuery = () => {
   const { data, isLoading, isError } = useQuery("tag", getTag);
   return { data, isLoading, isError };
+};
+
+export const getTagByIdQuery = (tagId) => {
+  return useQuery(["tag", tagId], () => getTagById(tagId));
 };
 
 export const addTagQuery = () => {
