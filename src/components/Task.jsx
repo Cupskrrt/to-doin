@@ -35,7 +35,7 @@ const Task = ({ query }) => {
                 <StarIconSolid
                   className="w-[1.5rem] hover:cursor-pointer"
                   id={item._id}
-                  onClick={(e) =>
+                  onClick={() =>
                     updateTask({
                       id: item._id,
                       important: false ?? item.important,
@@ -46,7 +46,7 @@ const Task = ({ query }) => {
                 <StarIcon
                   className="w-[1.5rem] hover:cursor-pointer"
                   id={item._id}
-                  onClick={(e) =>
+                  onClick={() =>
                     updateTask({
                       id: item._id,
                       important: true ?? item.important,
@@ -56,7 +56,7 @@ const Task = ({ query }) => {
               )}
               <TrashIcon
                 className="w-[1.5rem] hover:cursor-pointer"
-                onClick={(e) => deleteTask({ id: item._id })}
+                onClick={() => deleteTask({ id: item._id })}
               />
             </div>
           </div>

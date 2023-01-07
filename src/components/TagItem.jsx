@@ -23,7 +23,7 @@ const TagItem = () => {
             </Link>
             <TrashIcon
               className="w-4 items-end hover:cursor-pointer"
-              onClick={(e) =>
+              onClick={() =>
                 mutate({
                   id: tag._id,
                 })

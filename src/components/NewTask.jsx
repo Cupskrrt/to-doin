@@ -54,7 +54,7 @@ const NewTask = ({ popup }) => {
         </div>
         <Select options={options} onChange={(e) => setTag(e.value)} />
         <label>Important</label>
-        <input type="checkbox" onClick={(e) => setImportant(!important)} />
+        <input type="checkbox" onClick={() => setImportant(!important)} />
         <button onClick={handleSubmit}>submit</button>
       </form>
     </>
