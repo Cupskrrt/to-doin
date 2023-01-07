@@ -19,7 +19,6 @@ function App() {
         <div className="flex">
           <Sidebar />
           <Routes>
-            {/*TODO: MAKE THE TAG ROUTE  */}
             <Route path="/" element={<TodayPage />} />
             <Route path="/important" element={<ImportantPage />} />
             <Route path="/to-do" element={<TodoPage />} />
