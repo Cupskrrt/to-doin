@@ -12,7 +12,7 @@ const NewTag = ({ popup }) => {
       title: name,
       name,
     });
-    popup();
+    popup;
   };
 
   return (
